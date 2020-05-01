@@ -20,9 +20,9 @@ pygame.mixer.init()
 
 # 3 - Load image
 player = pygame.image.load("resources/images/dude.png")
-grass = pygame.image.load("resources/images/grass.png")
-castle = pygame.image.load("resources/images/castle.png")
-arrow = pygame.image.load("resources/images/bullet.png")
+BG = pygame.image.load("resources/images/BG.png")
+earth = pygame.image.load("resources/images/earth.png")
+inj = pygame.image.load("resources/images/inj.png")
 badguyimg1 = pygame.image.load("resources/images/badguy.png")
 badguyimg=badguyimg1
 healthbar = pygame.image.load("resources/images/healthbar.png")
@@ -48,11 +48,11 @@ while running:
     # 5 - clear the screen before drawing it again
     screen.fill(0)
     # 6 - draw the player on the screen at X:100, Y:100
-    for x in range(int(width/grass.get_width()+1)):
-        for y in range(int(height/grass.get_height()+1)):
-            screen.blit(grass,(x*100,y*100))
+    for x in range(int(width/BG.get_width()+1)):
+        for y in range(int(height/BG.get_height()+1)):
+            screen.blit(BG,(x*100,y*100))
  
-    screen.blit(castle,(0,100))
+    screen.blit(earth,(0,100))
    
     # 6.1 - Set player position and rotation
     position = pygame.mouse.get_pos()
@@ -60,19 +60,19 @@ while running:
     playerrot = pygame.transform.rotate(player, 360-angle*57.29)
     playerpos1 = (playerpos[0]-playerrot.get_rect().width/2, playerpos[1]-playerrot.get_rect().height/2)
     screen.blit(playerrot, playerpos1) 
-    # 6.2 - Draw arrows
-    for bullet in arrows:
+    # 6.2 - Draw injection (inj)
+    for bullet in inj:
         index=0
         velx=math.cos(bullet[0])*10
         vely=math.sin(bullet[0])*10
         bullet[1]+=velx
         bullet[2]+=vely
         if bullet[1]<-64 or bullet[1]>640 or bullet[2]<-64 or bullet[2]>480:
-            arrows.pop(index)
+            inj.pop(index)
         index+=1
-        for projectile in arrows:
-            arrow1 = pygame.transform.rotate(arrow, 360-projectile[0]*57.29)
-            screen.blit(arrow1, (projectile[1], projectile[2]))
+        for projectile in inj:
+            inj1 = pygame.transform.rotate(inj, 360-projectile[0]*57.29)
+            screen.blit(inj1, (projectile[1], projectile[2]))
     # 6.3 - Draw badgers
     if badtimer==0:
         badguys.append([640, random.randint(50,430)])
@@ -86,7 +86,7 @@ while running:
         if badguy[0]<-64:
             badguys.pop(index)
         badguy[0]-=7
-        # 6.3.1 - Attack castle
+        # 6.3.1 - Attack earth
         badrect=pygame.Rect(badguyimg.get_rect())
         badrect.top=badguy[1]
         badrect.left=badguy[0]
