@@ -73,7 +73,7 @@ while running:
         for projectile in inj:
             inj1 = pygame.transform.rotate(inj, 360-projectile[0]*57.29)
             screen.blit(inj1, (projectile[1], projectile[2]))
-    # 6.3 - Draw badgers
+    # 6.3 - Draw virus
     if badtimer==0:
         badguys.append([640, random.randint(50,430)])
         badtimer=100-(badtimer1*2)
